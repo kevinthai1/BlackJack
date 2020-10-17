@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Deck {
     public List<Card> startingDeck = new ArrayList<Card>();
+    public List<Card> playerDeck = new ArrayList<Card>();
 
     //Create our n deck of cards
     public Deck(int n){
@@ -35,5 +36,7 @@ public class Deck {
         //System.out.println(startingDeck);
         startingDeck.remove(rando);
         //System.out.println(startingDeck);
+        playerDeck.add(text);
+        System.out.println("Player's Hand: " + playerDeck);
     }
 }

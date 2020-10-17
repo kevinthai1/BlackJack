@@ -10,39 +10,41 @@ public class Card {
     public Card(int rank, int suit){
             this.rank = Rank[rank];
             this.suit = Suit[suit];
+    }
 
-            switch(this.rank){
-                case "A":
-                    intRank = 1;
-                case "2":
-                    intRank = 2;
-                case "3":
-                    intRank = 3;
-                case "4":
-                    intRank = 4;
-                case "5":
-                    intRank = 5;
-                case "6":
-                    intRank = 6;
-                case "7":
-                    intRank = 7;
-                case "8":
-                    intRank = 8;
-                case "9":
-                    intRank = 9;
-                case "10":
-                    intRank = 10;
-                case "J":
-                    intRank = 10;
-                case "Q":
-                    intRank = 10;
-                case "K":
-                    intRank = 10;
-            }
+    public int getIntRank() {
+        if (this.rank.equals("A")) {
+            intRank = 1;
+        } else if (this.rank.equals("2")) {
+            intRank = 2;
+        } else if (this.rank.equals("3")) {
+            intRank = 3;
+        } else if (this.rank.equals("4")) {
+            intRank = 4;
+        } else if (this.rank.equals("5")) {
+            intRank = 5;
+        } else if (this.rank.equals("6")) {
+            intRank = 6;
+        } else if (this.rank.equals("7")) {
+            intRank = 7;
+        } else if (this.rank.equals("8")) {
+            intRank = 8;
+        } else if (this.rank.equals("9")) {
+            intRank = 9;
+        } else if (this.rank.equals("10")) {
+            intRank = 10;
+        } else if (this.rank.equals("J")) {
+            intRank = 10;
+        } else if (this.rank.equals("Q")) {
+            intRank = 10;
+        } else if (this.rank.equals("K")) {
+            intRank = 10;
+        }
+        return intRank;
     }
 
     @Override
     public String toString() {
-        return "Card{" + "rank=" + rank + ", suit=" + suit + '}';
+        return "Card{" + "rank=" + rank + ", suit=" + suit +'}';
     }
 }

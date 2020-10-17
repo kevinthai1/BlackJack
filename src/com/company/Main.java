@@ -13,7 +13,8 @@ public class Main {
         Scanner deckInput = new Scanner(System.in);
         System.out.println("Enter the number of Decks: ");
         int deckNumInput = deckInput.nextInt();
-        Deck deck = new Deck(deckNumInput);
+        Deck startingDeck = new Deck(deckNumInput);
+        Deck player = new Deck(1);
 
         //Blackjack Code
         Boolean gameIsRunning = true;
@@ -24,15 +25,15 @@ public class Main {
 
             //Reading User's input
             Scanner userInput = new Scanner(System.in);
-            System.out.println("Input: end, draw, hit, stay");
+            System.out.println("Input: end(e), draw(d), hit, stay");
             String userStringInput = userInput.nextLine();
 
-            if (userStringInput.equals("end")){
+            if (userStringInput.equals("e")){
                 gameIsRunning = false;
             }
-            else if(userStringInput.equals("draw")){
-                deck.Draw();
-                System.out.println();
+            else if(userStringInput.equals("d")){
+                //startingDeck.Draw();
+                player.Draw();
             }
         }
     }
