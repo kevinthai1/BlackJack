@@ -42,7 +42,7 @@ public class Deck {
     }
 
     public void HandDisplay(String name){
-        System.out.println(name + "'s Hand: " + playerDeck);
+        System.out.println(name + "'s Hand: " + playerDeck); System.out.println("Starting Deck (both dealer and player have their own deck, needs fixing): " + startingDeck.size());
     }
 
     public void Clear(){
