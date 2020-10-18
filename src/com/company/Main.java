@@ -19,8 +19,9 @@ public class Main {
     static final String ANSI_WHITE = "\u001B[37m";
     static Integer dealerHandValue = 0;
     static Integer playerHandValue = 0;
-    static Deck player = new Deck(1);
+    static Deck startingDeck = new Deck(0);
     static Deck dealer = new Deck(1);
+    static Deck player = new Deck(1);
 
     public static void main(String[] args) {
 
@@ -28,7 +29,7 @@ public class Main {
         Scanner deckInput = new Scanner(System.in);
         System.out.println("Enter the number of Decks: ");
         int deckNumInput = deckInput.nextInt();
-        Deck startingDeck = new Deck(deckNumInput);
+        startingDeck = new Deck(deckNumInput);
 
         //Blackjack Code
         boolean gameIsRunning = true;
@@ -38,10 +39,9 @@ public class Main {
             //Deal the hands
             handNumber++;
             System.out.println(ANSI_GREEN + "Hand Number " + handNumber + ANSI_RESET);
-            dealerHandValue += dealer.Draw();
-            playerHandValue += player.Draw();
-            dealerHandValue += dealer.Draw();
-            playerHandValue += player.Draw();
+            dealerDraw();
+            playerDraw();
+            playerDraw();
             dealer.HandDisplay("Dealer");
             player.HandDisplay("Player");
             displayHandValue();
@@ -73,7 +73,7 @@ public class Main {
                     }
                     //Hit
                     else if (userStringInput.equals("h")){
-                        playerHandValue += player.Draw();
+                        playerDraw();
                         dealer.HandDisplay("Dealer");
                         player.HandDisplay("Player");
                         displayHandValue();
@@ -81,14 +81,13 @@ public class Main {
                     //Stay, Dealer has to hit if under 17. Then determines who has a higher hand
                     else if (userStringInput.equals("s")){
                         while (dealerHandValue <= 16){
-                            dealerHandValue += dealer.Draw();
+                            dealerDraw();
                             dealer.HandDisplay("Dealer");
                             player.HandDisplay("Player");
                             displayHandValue();
                         }
                         if (dealerHandValue > 21){
                             System.out.println(ANSI_BLUE + "WIN, Dealer over 21" + ANSI_RESET + "\r\n");
-                            resetHands();
                         }
                         else if (playerHandValue > dealerHandValue){
                             System.out.println(ANSI_BLUE + "WIN, Higher hand" + ANSI_RESET + "\r\n");
@@ -106,14 +105,26 @@ public class Main {
             }
         }
     }
+
     public static void displayHandValue(){
         System.out.println("Dealer#: " + ANSI_RED + dealerHandValue + ANSI_RESET);
         System.out.println("Player#: " + ANSI_RED + playerHandValue + ANSI_RESET);
     }
+
     public static void resetHands(){
         dealerHandValue = 0;
         playerHandValue = 0;
         player.Clear();
         dealer.Clear();
+    }
+
+    public static void dealerDraw(){
+        dealerHandValue += startingDeck.Draw();
+        dealer.addCard();
+    }
+
+    public static void playerDraw(){
+        playerHandValue += startingDeck.Draw();
+        player.addCard();
     }
 }

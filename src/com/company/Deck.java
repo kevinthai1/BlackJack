@@ -6,6 +6,7 @@ import java.util.List;
 public class Deck {
     public List<Card> startingDeck = new ArrayList<Card>();
     public List<Card> playerDeck = new ArrayList<Card>();
+    static Card drawnCard = new Card(0,0);
 
     //Create our n deck of cards
     public Deck(int n){
@@ -28,21 +29,24 @@ public class Deck {
         return deckofCards;
     }
 
-    //Players will draw a random card and return the value of that card
+    //Draws a random card, removes it from the original deck and returns the int value of that card
     public Integer Draw(){
         int rando = (int) ((Math.random() * startingDeck.size()));
         //System.out.println(rando);
-        Card text = startingDeck.get(rando);
-        //System.out.println(text);
+        drawnCard = startingDeck.get(rando);
+        //System.out.println(rando);
         //System.out.println(startingDeck);
         startingDeck.remove(rando);
         //System.out.println(startingDeck);
-        playerDeck.add(text);
-        return text.getIntRank();
+        return drawnCard.getIntRank();
+    }
+
+    public void addCard(){
+        playerDeck.add(drawnCard);
     }
 
     public void HandDisplay(String name){
-        System.out.println(name + "'s Hand: " + playerDeck); System.out.println("Starting Deck (both dealer and player have their own deck, needs fixing): " + startingDeck.size());
+        System.out.println(name + "'s Hand: " + playerDeck);
     }
 
     public void Clear(){
