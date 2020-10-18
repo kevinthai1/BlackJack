@@ -2,7 +2,7 @@ package com.company;
 import java.util.HashMap;
 
 public class Card {
-    static final String[] Rank = {"","A","2","3","4","5","6","7","8","9","10","J","Q","K"};
+    static final String[] Rank = {"","ACE","2","3","4","5","6","7","8","9","10","JACK","QUEEN","KING"};
     static final String[] Suit = {"Clubs", "Diamonds", "Hearts", "Spades"};
     String rank, suit;
     int intRank;
@@ -13,7 +13,7 @@ public class Card {
     }
 
     public int getIntRank() {
-        if (this.rank.equals("A")) {
+        if (this.rank.equals("ACE")) {
             intRank = 1;
         } else if (this.rank.equals("2")) {
             intRank = 2;
@@ -33,11 +33,11 @@ public class Card {
             intRank = 9;
         } else if (this.rank.equals("10")) {
             intRank = 10;
-        } else if (this.rank.equals("J")) {
+        } else if (this.rank.equals("JACK")) {
             intRank = 10;
-        } else if (this.rank.equals("Q")) {
+        } else if (this.rank.equals("QUEEN")) {
             intRank = 10;
-        } else if (this.rank.equals("K")) {
+        } else if (this.rank.equals("KING")) {
             intRank = 10;
         }
         return intRank;
@@ -45,6 +45,6 @@ public class Card {
 
     @Override
     public String toString() {
-        return "Card{" + "rank=" + rank + ", suit=" + suit +'}';
+        return rank + " of " + suit;
     }
 }

@@ -28,15 +28,24 @@ public class Deck {
         return deckofCards;
     }
 
-    public void Draw(){
+    //Players will draw a random card and return the value of that card
+    public Integer Draw(){
         int rando = (int) ((Math.random() * startingDeck.size()));
         //System.out.println(rando);
         Card text = startingDeck.get(rando);
-        System.out.println(text);
+        //System.out.println(text);
         //System.out.println(startingDeck);
         startingDeck.remove(rando);
         //System.out.println(startingDeck);
         playerDeck.add(text);
-        System.out.println("Player's Hand: " + playerDeck);
+        return text.getIntRank();
+    }
+
+    public void HandDisplay(String name){
+        System.out.println(name + "'s Hand: " + playerDeck);
+    }
+
+    public void Clear(){
+            playerDeck.clear();
     }
 }
