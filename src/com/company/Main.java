@@ -20,7 +20,7 @@ public class Main {
     static Deck startingDeck = new Deck(0);
     static Deck dealer = new Deck(1);
     static Deck player = new Deck(1);
-    static Card tempDrawnCard = new Card(0,0);
+    static Card drawnCard = new Card(0,0);
 
     public static void main(String[] args) {
 
@@ -118,14 +118,14 @@ public class Main {
     }
 
     public static void dealerDraw(){
-        tempDrawnCard = startingDeck.Draw();
-        dealer.handCalculate();
-        dealer.addCard(tempDrawnCard);
+        drawnCard = startingDeck.Draw();
+        dealer.handCalculate(drawnCard);
+        dealer.addCard(drawnCard);
     }
 
     public static void playerDraw(){
-        tempDrawnCard = startingDeck.Draw();
-        player.handCalculate();
-        player.addCard(tempDrawnCard);
+        drawnCard = startingDeck.Draw();
+        player.handCalculate(drawnCard);
+        player.addCard(drawnCard);
     }
 }
