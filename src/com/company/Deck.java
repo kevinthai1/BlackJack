@@ -57,6 +57,7 @@ public class Deck {
             for (int i = 0; i < aceValue11; i++){
                 handValue -= 11;
                 handValue += 1;
+                aceValue11--;
             }
         }
     }
