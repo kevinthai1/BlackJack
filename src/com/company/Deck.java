@@ -36,8 +36,25 @@ public class Deck {
         drawnCard = startingDeck.get(rando);
         startingDeck.remove(rando);
         handValue += drawnCard.getIntRank();
+        aceCheck();
+    }
 
-        //check for an ace
+    public void addCard(){
+        hand.add(drawnCard);
+    }
+
+    public void handDisplay(String name){
+        System.out.println(name + "'s Hand: " + hand);
+    }
+
+    public void clear(){
+            hand.clear();
+            handValue = 0;
+            ace = 0;
+            aceValue11 = 0;
+    }
+
+    public void aceCheck(){
         if (drawnCard.getIntRank() == 11){
             ace++;
             for (int i = 0; i < ace; i++){
@@ -60,18 +77,5 @@ public class Deck {
                 aceValue11--;
             }
         }
-    }
-
-    public void addCard(){
-        hand.add(drawnCard);
-    }
-
-    public void handDisplay(String name){
-        System.out.println(name + "'s Hand: " + hand);
-    }
-
-    public void clear(){
-            hand.clear();
-            handValue = 0;
     }
 }
