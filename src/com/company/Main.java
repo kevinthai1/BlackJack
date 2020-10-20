@@ -17,11 +17,10 @@ public class Main {
     static final String ANSI_PURPLE = "\u001B[35m";
     static final String ANSI_CYAN = "\u001B[36m";
     static final String ANSI_WHITE = "\u001B[37m";
-    //static Integer dealerHandValue = 0;
-    //static Integer playerHandValue = 0;
     static Deck startingDeck = new Deck(0);
     static Deck dealer = new Deck(1);
     static Deck player = new Deck(1);
+    static Card tempDrawnCard = new Card(0,0);
 
     public static void main(String[] args) {
 
@@ -119,12 +118,14 @@ public class Main {
     }
 
     public static void dealerDraw(){
-        dealer.Draw();
-        dealer.addCard();
+        tempDrawnCard = startingDeck.Draw();
+        dealer.handCalculate();
+        dealer.addCard(tempDrawnCard);
     }
 
     public static void playerDraw(){
-        player.Draw();
-        player.addCard();
+        tempDrawnCard = startingDeck.Draw();
+        player.handCalculate();
+        player.addCard(tempDrawnCard);
     }
 }

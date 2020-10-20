@@ -8,14 +8,15 @@ public class Deck {
     public List<Card> hand = new ArrayList<Card>();
     private Card drawnCard = new Card(0,0);
     int handValue = 0, ace = 0, aceValue11 = 0;
+    static int cardValue = 0;
 
-    //Create our n deck of cards
+    //Create our number of deck of cards
     public Deck(int n){
         for (int k = 0; k < n; k++){
             for (int i = 1; i < 14; i++){
                 for (int j = 0; j < 4; j++){
                     Card objCard = new Card(i,j);
-                        startingDeck.add(objCard);
+                    startingDeck.add(objCard);
                 }
             }
         }
@@ -31,16 +32,23 @@ public class Deck {
     }
 
     //Draws a random card, removes it from the original deck and returns the int value of that card
-    public void Draw(){
+    public Card Draw(){
         int rando = (int) ((Math.random() * startingDeck.size()));
         drawnCard = startingDeck.get(rando);
+        cardValue = drawnCard.getIntRank();
         startingDeck.remove(rando);
-        handValue += drawnCard.getIntRank();
+        System.out.println(startingDeck.size());
+        return drawnCard;
+    }
+
+    public void handCalculate(){
+        System.out.println("Card Value: " + cardValue);
+        handValue += cardValue;
         aceCheck();
     }
 
-    public void addCard(){
-        hand.add(drawnCard);
+    public void addCard(Card c){
+        hand.add(c);
     }
 
     public void handDisplay(String name){
@@ -52,6 +60,17 @@ public class Deck {
             handValue = 0;
             ace = 0;
             aceValue11 = 0;
+    }
+
+    public void shuffle(int n){
+        for (int k = 0; k < n; k++){
+            for (int i = 1; i < 14; i++){
+                for (int j = 0; j < 4; j++){
+                    Card objCard = new Card(i,j);
+                    startingDeck.add(objCard);
+                }
+            }
+        }
     }
 
     public void aceCheck(){
