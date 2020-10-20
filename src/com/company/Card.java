@@ -14,7 +14,7 @@ public class Card {
 
     public int getIntRank() {
         if (this.rank.equals("ACE")) {
-            intRank = 1;
+            intRank = 11;
         } else if (this.rank.equals("2")) {
             intRank = 2;
         } else if (this.rank.equals("3")) {

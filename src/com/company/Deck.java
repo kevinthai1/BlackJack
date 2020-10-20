@@ -5,8 +5,9 @@ import java.util.List;
 
 public class Deck {
     public List<Card> startingDeck = new ArrayList<Card>();
-    public List<Card> playerDeck = new ArrayList<Card>();
-    static Card drawnCard = new Card(0,0);
+    public List<Card> hand = new ArrayList<Card>();
+    private Card drawnCard = new Card(0,0);
+    int handValue = 0, ace = 0, aceValue11 = 0;
 
     //Create our n deck of cards
     public Deck(int n){
@@ -30,26 +31,46 @@ public class Deck {
     }
 
     //Draws a random card, removes it from the original deck and returns the int value of that card
-    public Integer Draw(){
+    public void Draw(){
         int rando = (int) ((Math.random() * startingDeck.size()));
-        //System.out.println(rando);
         drawnCard = startingDeck.get(rando);
-        //System.out.println(rando);
-        //System.out.println(startingDeck);
         startingDeck.remove(rando);
-        //System.out.println(startingDeck);
-        return drawnCard.getIntRank();
+        handValue += drawnCard.getIntRank();
+
+        //check for an ace
+        if (drawnCard.getIntRank() == 11){
+            ace++;
+            for (int i = 0; i < ace; i++){
+                handValue -= 11;
+            }
+            for (int i = 0; i < ace; i++){
+                if (handValue < 11){
+                    handValue += 11;
+                    aceValue11++;
+                }
+                else{
+                    handValue += 1;
+                }
+            }
+        }
+        if (aceValue11 > 0 && handValue > 21){
+            for (int i = 0; i < aceValue11; i++){
+                handValue -= 11;
+                handValue += 1;
+            }
+        }
     }
 
     public void addCard(){
-        playerDeck.add(drawnCard);
+        hand.add(drawnCard);
     }
 
-    public void HandDisplay(String name){
-        System.out.println(name + "'s Hand: " + playerDeck);
+    public void handDisplay(String name){
+        System.out.println(name + "'s Hand: " + hand);
     }
 
-    public void Clear(){
-            playerDeck.clear();
+    public void clear(){
+            hand.clear();
+            handValue = 0;
     }
 }
