@@ -4,6 +4,8 @@ import java.util.HashMap;
 public class Card {
     static final String[] Rank = {"","ACE","2","3","4","5","6","7","8","9","10","JACK","QUEEN","KING"};
     static final String[] Suit = {"Clubs", "Diamonds", "Hearts", "Spades"};
+    static final String ANSI_BLUE = "\u001B[34m";
+    static final String ANSI_RESET = "\u001B[0m";
     String rank, suit;
     int intRank;
 
@@ -45,6 +47,6 @@ public class Card {
 
     @Override
     public String toString() {
-        return rank + " of " + suit;
+        return ANSI_BLUE + rank + ANSI_RESET + " of " + suit;
     }
 }

@@ -7,7 +7,7 @@ public class Deck {
     public List<Card> startingDeck = new ArrayList<Card>();
     public List<Card> hand = new ArrayList<Card>();
     private Card drawnCard = new Card(0,0);
-    int handValue = 0, ace = 0, aceValue11 = 0;
+    int handValue = 0, ace = 0, aceValue11 = 0, totalMoney = 100;
     static int cardValue = 0, originalDeckAmount;
 
     //Create our number of deck of cards
