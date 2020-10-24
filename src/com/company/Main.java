@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 
 public class Main {
@@ -21,8 +22,9 @@ public class Main {
     static Deck dealer = new Deck(1);
     static Deck player = new Deck(1);
     static Card drawnCard = new Card(0,0);
+    static int time = 2;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         //Reading and creating Deck number
         System.out.println("Enter the number of Decks: ");
@@ -54,6 +56,7 @@ public class Main {
 
             //Check for player blackjack
             if (player.handValue == 21){
+                TimeUnit.SECONDS.sleep(time);
                 dealerDraw();
                 displayHandValue();
                 if (dealer.handValue == 21){
@@ -89,6 +92,7 @@ public class Main {
                     else{
                         System.out.println("\r\n" + "Input: end(e), hit(h), stay(s)" + "\r\n");
                     }
+                    doubleDown = false;
                     Scanner userInput = new Scanner(System.in);
                     String userStringInput = userInput.nextLine();
 
@@ -104,25 +108,33 @@ public class Main {
                     }
                     //double down same as hit and stay but with adjusted pay rate
                     else if (userStringInput.equals("d")){
+                        player.totalMoney -= betValue;
                         playerDraw();
-                        while (dealer.handValue <= 16){
-                            dealerDraw();
+                        if (player.handValue > 21){
                             displayHandValue();
-                        }
-                        if (dealer.handValue > 21){
-                            System.out.println(ANSI_BLUE + "WIN, Dealer over 21" + ANSI_RESET + "\r\n");
-                            player.totalMoney += betValue * 3;
-                        }
-                        else if (player.handValue > dealer.handValue){
-                            System.out.println(ANSI_BLUE + "WIN, Higher hand" + ANSI_RESET + "\r\n");
-                            player.totalMoney += betValue * 3;
-                        }
-                        else if (dealer.handValue > player.handValue){
-                            System.out.println(ANSI_RED + "LOSE, Smaller hand" + ANSI_RESET + "\r\n");
+                            System.out.println(ANSI_RED + "LOSE, Bust over 21" + ANSI_RESET + "\r\n");
                         }
                         else{
-                            System.out.println(ANSI_BLUE + "PUSH" + ANSI_RESET + "\r\n");
-                            player.totalMoney += betValue;
+                            while (dealer.handValue <= 16){
+                                dealerDraw();
+                                displayHandValue();
+                                TimeUnit.SECONDS.sleep(time);
+                            }
+                            if (dealer.handValue > 21){
+                                System.out.println(ANSI_BLUE + "WIN, Dealer over 21" + ANSI_RESET + "\r\n");
+                                player.totalMoney += betValue * 3;
+                            }
+                            else if (player.handValue > dealer.handValue){
+                                System.out.println(ANSI_BLUE + "WIN, Higher hand" + ANSI_RESET + "\r\n");
+                                player.totalMoney += betValue * 3;
+                            }
+                            else if (dealer.handValue > player.handValue){
+                                System.out.println(ANSI_RED + "LOSE, Smaller hand" + ANSI_RESET + "\r\n");
+                            }
+                            else{
+                                System.out.println(ANSI_BLUE + "PUSH" + ANSI_RESET + "\r\n");
+                                player.totalMoney += betValue;
+                            }
                         }
                         resetHands();
                         currentHand = false;
@@ -132,6 +144,7 @@ public class Main {
                         while (dealer.handValue <= 16){
                             dealerDraw();
                             displayHandValue();
+                            TimeUnit.SECONDS.sleep(time);
                         }
                         if (dealer.handValue > 21){
                             System.out.println(ANSI_BLUE + "WIN, Dealer over 21" + ANSI_RESET + "\r\n");
@@ -161,6 +174,7 @@ public class Main {
         player.handDisplay("Player");
         System.out.println("Dealer#: " + ANSI_RED + dealer.handValue + ANSI_RESET);
         System.out.println("Player#: " + ANSI_RED + player.handValue + ANSI_RESET);
+        System.out.println();
     }
 
     public static void resetHands(){

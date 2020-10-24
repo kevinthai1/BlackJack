@@ -35,7 +35,7 @@ public class Deck {
         drawnCard = startingDeck.get(rando);
         cardValue = drawnCard.getIntRank();
         startingDeck.remove(rando);
-        System.out.println(startingDeck.size());
+        //System.out.println(startingDeck.size());
         return drawnCard;
     }
 
@@ -62,7 +62,7 @@ public class Deck {
     public void shuffle(int n){
         for (int k = 0; k < n; k++){
             for (int i = 1; i < 14; i++){
-                for (int j = 0; j < 4; j++){
+                for (int j = 1; j < 5; j++){
                     Card objCard = new Card(i,j);
                     startingDeck.add(objCard);
                 }
