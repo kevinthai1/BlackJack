@@ -22,8 +22,8 @@ public class Main {
     static Deck dealer = new Deck(1);
     static Deck player = new Deck(1);
     static Card drawnCard = new Card(0,0);
-    static int time = 2, handNumber = 0;
-    static float endRound, winrate, amountOfWins;
+    static int time = 2, handNumber = 0, runningCount = 0;
+    static float endRound, winrate, amountOfWins, trueCount, deckSize;
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -39,6 +39,7 @@ public class Main {
         while (gameIsRunning == true){
             //Take user's bet input
             System.out.println("\r\n" + "Balance: $" + player.totalMoney + "\n" + "Enter your bet amount" + "\r\n");
+            System.out.println("Running Count: " + runningCount + " True Count: " + trueCount + " WinRate: %" + Math.round(winrate));
             Scanner playerBet = new Scanner(System.in);
             int betValue = playerBet.nextInt();
             player.totalMoney -= betValue;
@@ -182,7 +183,7 @@ public class Main {
         System.out.println("Dealer#: " + ANSI_RED + dealer.handValue + ANSI_RESET);
         System.out.println("Player#: " + ANSI_RED + player.handValue + ANSI_RESET);
         winrate = (amountOfWins / endRound) * 100;
-        System.out.println("Running Count: " + "True Count: " + "WinRate: %" + Math.round(winrate));
+        System.out.println("Running Count: " + runningCount + " True Count: " + trueCount + " WinRate: %" + Math.round(winrate));
     }
 
     public static void resetHands(){
@@ -196,11 +197,19 @@ public class Main {
         drawnCard = startingDeck.Draw();
         dealer.handCalculate(drawnCard);
         dealer.addCard(drawnCard);
+        countTrackers();
     }
 
     public static void playerDraw(){
         drawnCard = startingDeck.Draw();
         player.handCalculate(drawnCard);
         player.addCard(drawnCard);
+        countTrackers();
+    }
+
+    public static void countTrackers(){
+        runningCount += drawnCard.getIntCount();
+        deckSize = startingDeck.getSize() / 52f;
+        trueCount = runningCount / deckSize;
     }
 }

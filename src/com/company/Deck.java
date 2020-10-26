@@ -44,6 +44,9 @@ public class Deck {
         aceCheck(aceChecker);
     }
 
+    public int getSize(){
+       return startingDeck.size();
+    }
     public void addCard(Card c){
         hand.add(c);
     }
